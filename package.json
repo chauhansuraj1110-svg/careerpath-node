@@ -1,0 +1,24 @@
+{
+  "name": "careerpath",
+  "version": "1.0.0",
+  "description": "CareerPath job portal - Node.js + MySQL port",
+  "main": "server.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./public/tailwind.css --minify",
+    "dev:css": "tailwindcss -i ./src/input.css -o ./public/tailwind.css --watch",
+    "prestart": "npm run build:css",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20.12"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "mysql2": "^3.24.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}

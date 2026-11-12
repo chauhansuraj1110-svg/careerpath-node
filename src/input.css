@@ -1,0 +1,31 @@
+/* Tailwind v4 entry point. Build:  npm run build:css  ->  public/tailwind.css */
+@import "tailwindcss";
+/* Tell Tailwind which files contain class names to generate. */
+@source "../ui.js";
+@source "../server.js";
+
+/* Brand colours come from CSS variables so each role (admin / job seeker / recruiter) gets its own theme. */
+@theme inline {
+  --color-brand: var(--c);
+  --color-brand-dark: var(--c-dark);
+  --color-page: var(--page);
+  --font-sans: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+}
+/* Role themes: <body class="t-admin"> etc. override the variables (c = main colour, c-dark = hover/dark, page = page background). */
+:root { --c: #0909ff; --c-dark: #0606c4; --page: #f3f5fb; }
+body.t-admin { --c: #800080; --c-dark: #5e005e; --page: #e3c7da; }
+body.t-jobseeker, body.t-jslogin { --c: #006600; --c-dark: #004d00; --page: #e3e7e3; }
+body.t-recruiter, body.t-rclogin { --c: #000080; --c-dark: #00005c; --page: #a1bae3; }
+
+/* Base styles: default look for plain <button>, links and images used inside the HTML helpers. */
+@layer base {
+  button { @apply cursor-pointer rounded-md border border-brand bg-brand px-4 py-2 text-sm font-semibold text-white transition hover:bg-brand-dark; }
+  button[type="reset"] { @apply border-slate-300 bg-white text-slate-700 hover:bg-slate-100; }
+  a { @apply text-brand; }
+  img { @apply inline-block max-w-full; }
+}
+/* Reusable component classes (`.btn` links, `.input` form controls). */
+@layer components {
+  .btn { @apply inline-block cursor-pointer rounded-md border border-brand bg-brand px-4 py-2 text-sm font-semibold text-white no-underline transition hover:bg-brand-dark; }
+  .input { @apply w-full max-w-md rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-800 outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/25; }
+}
